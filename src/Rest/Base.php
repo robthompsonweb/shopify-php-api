@@ -59,7 +59,7 @@ abstract class Base extends \stdClass
         }
     }
 
-    public function save($updateObject = false): void
+    public function save($updateObject = false)
     {
         $data = self::dataDiff($this->toArray(true), $this->originalState);
 
@@ -73,11 +73,13 @@ abstract class Base extends \stdClass
 
             self::createInstance($body[$this->getJsonBodyName()], $this->session, $this);
         }
+
+        return $response->getDecodedBody();
     }
 
-    public function saveAndUpdate(): void
+    public function saveAndUpdate()
     {
-        $this->save(true);
+        return $this->save(true);
     }
 
     public function __get(string $name)
